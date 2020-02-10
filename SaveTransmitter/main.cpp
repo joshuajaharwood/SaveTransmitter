@@ -15,38 +15,49 @@ typedef unsigned long __PTRDIFF_TYPE__;
 typedef SSIZE_T ssize_t;
 #endif
 
+#include <stdio.h>
 #include <switch.h>
+#include <string.h>
+#include <dirent.h>
 #include <iostream>
 
-int main(int argc, char* argv[]) {
+int main(int argc, char** argv)
+{
 	consoleInit(NULL);
 
-	// Other initialization goes here. As a demonstration, we print hello world.
-	std::cout << "Hello World!\n" << std::endl;
+	DIR* dir;
+	struct dirent* ent;
+
+	dir = opendir("");//Open current-working-directory.
+	if (dir == NULL)
+	{
+		printf("Failed to open dir.\n");
+	}
+	else
+	{
+		printf("Dir-listing for '':\n");
+		while ((ent = readdir(dir)))
+		{
+			printf("d_name: %s\n", ent->d_name);
+		}
+		closedir(dir);
+		printf("Done.\n");
+	}
 
 	// Main loop
-	while (appletMainLoop()) {
-		// Scan all the inputs. This should be done once for each frame
+	while (appletMainLoop())
+	{
+		//Scan all the inputs. This should be done once for each frame
 		hidScanInput();
 
-		// hidKeysDown returns information about which buttons have been
-		// just pressed in this frame compared to the previous one
+		//hidKeysDown returns information about which buttons have been just pressed (and they weren't in the previous frame)
 		u64 kDown = hidKeysDown(CONTROLLER_P1_AUTO);
 
-		if (kDown & KEY_A)
-			std::cout << "Pressed A button!\n" << std::endl;
+		if (kDown & KEY_PLUS) break; // break in order to return to hbmenu
 
-
-		if (kDown & KEY_PLUS)
-			break; // break in order to return to hbmenu
-
-		// Your code goes here
-
-		// Update the console, sending a new frame to the display
 		consoleUpdate(NULL);
 	}
 
-	// Deinitialize and clean up resources used by the console (important!)
 	consoleExit(NULL);
 	return 0;
 }
