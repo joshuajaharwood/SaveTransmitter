@@ -39,9 +39,9 @@ include $(DEVKITPRO)/libnx/switch_rules
 #---------------------------------------------------------------------------------
 TARGET		:=	$(notdir $(CURDIR))
 BUILD		:=	build
-#SOURCES	:=	source
 DATA		:=	data
 INCLUDES	:=	include
+SOURCES		:=	.
 #ROMFS		:=	romfs
 
 APP_TITLE	:=	SaveTransmitter

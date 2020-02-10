@@ -1,0 +1,1 @@
+nxlink.exe -a 192.168.0.186 SaveTransmitter.nro

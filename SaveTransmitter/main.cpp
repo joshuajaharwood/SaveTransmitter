@@ -36,6 +36,7 @@ int main(int argc, char* argv[]) {
 		if (kDown & KEY_A)
 			std::cout << "Pressed A button!\n" << std::endl;
 
+
 		if (kDown & KEY_PLUS)
 			break; // break in order to return to hbmenu
 
