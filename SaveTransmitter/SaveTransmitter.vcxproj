@@ -69,7 +69,7 @@
     <NMakeCleanCommandLine>make clean</NMakeCleanCommandLine>
     <NMakeReBuildCommandLine>make clean all</NMakeReBuildCommandLine>
     <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
-    <NMakeIncludeSearchPath>$(ProjectDir)\include;C:\devkitPro\devkitA64\include;C:\devkitPro\libnx\include;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
+    <NMakeIncludeSearchPath>$(ProjectDir)\include;C:\devkitPro\devkitA64\include;C:\devkitPro\libnx\include;C:\Users\Joshua\source\vcpkg\installed\x86-windows\include;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <NMakeBuildCommandLine>make</NMakeBuildCommandLine>

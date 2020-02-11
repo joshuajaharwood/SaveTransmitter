@@ -21,32 +21,51 @@ typedef SSIZE_T ssize_t;
 #include <dirent.h>
 #include <iostream>
 
-int main(int argc, char** argv)
-{
-	consoleInit(NULL);
+void printBanner() {
+	printf("SaveTransmitter 0.0.1\n");
+	printf("by CFHeadphase\n\n");
+}
 
+int main(int argc, char** argv) {
+	consoleInit(NULL);
+	printBanner();
+
+	// dirent defines
 	DIR* dir;
 	struct dirent* ent;
 
-	dir = opendir("");//Open current-working-directory.
-	if (dir == NULL)
-	{
+	printf("Printing directory listing...\n\n");
+
+	dir = opendir(""); //Open current-working-directory.
+	// check if directory exists...
+	int folders = 0, files = 0;
+
+	if (dir == NULL) {
 		printf("Failed to open dir.\n");
-	}
-	else
-	{
-		printf("Dir-listing for '':\n");
-		while ((ent = readdir(dir)))
-		{
-			printf("d_name: %s\n", ent->d_name);
+	} else {
+		// while ent has remaining directories
+		while ((ent = readdir(dir))) {
+			printf("name: %s", ent->d_name);
+
+			// type - 4 = folder, 8 = file
+			if (ent->d_type == 4) {
+				printf(" type: folder\n");
+				folders++;
+			} else {
+				printf(" type: file\n");
+				files++;
+			}
 		}
 		closedir(dir);
-		printf("Done.\n");
+		printf("\nDone enumerating.\n");
 	}
 
+	printf("\nCounted %i files and %i directories.\n\n", files, folders);
+
+	printf("Press + to exit.");
+
 	// Main loop
-	while (appletMainLoop())
-	{
+	while (appletMainLoop()) {
 		//Scan all the inputs. This should be done once for each frame
 		hidScanInput();
 
